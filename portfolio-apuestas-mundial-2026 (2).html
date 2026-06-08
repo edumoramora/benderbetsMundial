@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BENDERBETS · WORLD CUP 26 · ANÁLISIS TIPSTER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Paleta extraída de la identidad oficial 2026 */
+  --blue:#2B2F9E;        /* azul real (bloque izq) */
+  --cyan:#3FB7E6;        /* cian */
+  --lime:#B9D532;        /* verde lima */
+  --green:#3AAA4A;       /* verde bloque central */
+  --red:#E8341C;         /* rojo */
+  --purple:#6E3FB0;      /* morado */
+  --gold:#C8961E;        /* dorado trofeo */
+  --gold-lt:#E8B84B;
+  --ink:#101012;         /* negro logo 26 */
+  --paper:#ffffff;
+  --bg:#0d0d0f;
+  --line:rgba(255,255,255,.10);
+  --w:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Archivo',sans-serif;background:var(--bg);color:var(--paper);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lime);color:var(--ink)}
+
+/* radius "stadium" característico del branding */
+.stadium{border-radius:90px 90px 14px 14px}
+
+/* ============ NAV ============ */
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 26px;background:var(--ink);border-bottom:3px solid var(--lime)}
+nav .brand{display:flex;align-items:center;gap:10px;font-family:'Anton';font-size:20px;letter-spacing:.5px;text-transform:uppercase}
+nav .brand .mini26{font-family:'Anton';background:var(--paper);color:var(--ink);padding:1px 9px;border-radius:14px 14px 5px 5px;font-size:18px}
+nav .links{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--paper);text-decoration:none;padding:8px 12px;border-radius:30px;transition:.2s}
+nav a:hover{background:var(--lime);color:var(--ink)}
+
+/* ============ HERO — réplica del logo de bloques ============ */
+.hero{position:relative;background:var(--ink);padding:0;overflow:hidden}
+.blockgrid{display:grid;grid-template-columns:repeat(3,1fr);min-height:88vh;gap:0;position:relative}
+.col{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+/* columna izquierda: azul con "panel" blanco redondeado */
+.col.c1{background:var(--blue)}
+.col.c1 .panel{position:absolute;right:-10%;top:8%;bottom:8%;width:78%;background:var(--paper);border-radius:200px 30px 30px 200px}
+.col.c1 .cyan{position:absolute;left:0;top:0;width:55%;height:30%;background:var(--cyan);border-radius:0 0 60px 0}
+/* columna central: lima detrás, verde stadium delante con contenido */
+.col.c2{background:var(--lime)}
+.col.c2 .green{position:absolute;inset:3% 6%;background:var(--green);border-radius:120px 120px 18px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 18px}
+/* columna derecha: rojo con panel blanco + pico morado */
+.col.c3{background:var(--red)}
+.col.c3 .panel{position:absolute;left:-10%;top:6%;bottom:18%;width:80%;background:var(--paper);border-radius:30px 200px 200px 30px}
+.col.c3 .purple{position:absolute;right:0;bottom:0;width:46%;height:34%;background:var(--purple);border-radius:60px 0 0 0}
+
+/* trofeo + textos dentro del bloque verde */
+.trophy{width:64px;height:auto;margin-bottom:14px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.col.c2 .wc{font-family:'Anton';letter-spacing:3px;font-size:15px;color:#fff;opacity:.95}
+.col.c2 .host{font-family:'Anton';font-size:clamp(20px,3vw,30px);line-height:.96;color:#fff;text-transform:uppercase;margin-top:4px}
+
+/* overlay con el título real sobre toda la rejilla */
+.hero-overlay{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:flex-end;padding:46px 30px;pointer-events:none;background:linear-gradient(to top,rgba(8,8,10,.92) 0%,rgba(8,8,10,.7) 28%,rgba(8,8,10,.15) 52%,transparent 70%)}
+.hero-overlay .tag{display:inline-block;width:fit-content;background:var(--lime);color:var(--ink);font-weight:900;letter-spacing:2px;font-size:13px;text-transform:uppercase;padding:7px 15px;border-radius:30px;margin-bottom:16px}
+.hero-overlay h1{font-family:'Anton';font-size:clamp(46px,10vw,128px);line-height:.82;text-transform:uppercase;color:#fff;letter-spacing:-1px;text-shadow:0 4px 30px rgba(0,0,0,.85)}
+.hero-overlay h1 .out{-webkit-text-stroke:2.5px var(--lime);color:transparent;text-shadow:none}
+.hero-overlay h1 .yr{display:block;font-size:.42em;letter-spacing:6px;color:var(--gold-lt);margin-top:10px;-webkit-text-stroke:0;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.hero-overlay .sub{max-width:560px;margin-top:16px;font-weight:600;font-size:15px;line-height:1.5;color:rgba(255,255,255,.92);text-shadow:0 2px 12px rgba(0,0,0,.7)}
+
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--ink);border-top:3px solid var(--lime)}
+.statbar .s{padding:22px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+.statbar .s:last-child{border-right:0}
+.statbar .s b{font-family:'Anton';font-size:clamp(28px,4vw,42px);display:block;line-height:1}
+.statbar .s.b1 b{color:var(--cyan)} .statbar .s.b2 b{color:var(--lime)} .statbar .s.b3 b{color:var(--red)} .statbar .s.b4 b{color:var(--gold-lt)}
+.statbar .s span{font-weight:800;letter-spacing:1.5px;font-size:11px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* ============ SECTIONS ============ */
+section{padding:78px 28px}
+.wrap{max-width:var(--w);margin:0 auto}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:6px;flex-wrap:wrap}
+.sec-head .badge{font-family:'Anton';font-size:22px;background:var(--paper);color:var(--ink);width:46px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:18px 18px 6px 6px;flex:none}
+.sec-head h2{font-family:'Anton';font-size:clamp(28px,5vw,56px);text-transform:uppercase;line-height:.92;color:#fff}
+.sec-head h2 em{font-style:normal;color:var(--lime)}
+.sec-sub{font-size:16px;color:rgba(255,255,255,.62);max-width:730px;margin:14px 0 38px;line-height:1.55}
+
+/* color tab strip decorativa */
+.colorstrip{display:flex;height:8px;border-radius:20px;overflow:hidden;margin-bottom:30px;max-width:340px}
+.colorstrip i{flex:1}
+.colorstrip i:nth-child(1){background:var(--blue)}.colorstrip i:nth-child(2){background:var(--cyan)}.colorstrip i:nth-child(3){background:var(--lime)}.colorstrip i:nth-child(4){background:var(--green)}.colorstrip i:nth-child(5){background:var(--red)}.colorstrip i:nth-child(6){background:var(--purple)}
+
+/* favoritos */
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.fav{position:relative;border-radius:30px 30px 14px 14px;overflow:hidden;background:#17171b;border:1px solid var(--line);transition:transform .25s}
+.fav:hover{transform:translateY(-6px)}
+.fav .top{padding:18px}
+.fav .rank{font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--lime)}
+.fav .team{font-family:'Anton';font-size:26px;text-transform:uppercase;line-height:1;margin-top:4px}
+.fav .body{padding:0 18px 18px}
+.fav .odd-label{font-weight:800;letter-spacing:1.5px;font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase}
+.fav .odd{font-family:'Anton';font-size:40px;line-height:.9;color:var(--gold-lt)}
+.fav .prob{margin-top:10px;height:7px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+.fav .prob i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--lime))}
+.fav .prob-txt{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-weight:700}
+.fav .stripe{height:6px;width:100%}
+
+/* analyst */
+.analyst{background:linear-gradient(135deg,#17171b,#1d1d22);border-radius:24px;padding:28px;margin-bottom:36px;border:1px solid var(--line);position:relative;overflow:hidden}
+.analyst:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(var(--green),var(--lime))}
+.analyst .who{font-weight:900;letter-spacing:2px;color:var(--lime);font-size:13px;text-transform:uppercase;margin-bottom:8px}
+.analyst p{font-size:15px;line-height:1.62;color:rgba(255,255,255,.82)}
+.analyst p+p{margin-top:10px}
+
+/* table */
+.odds-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.odds-table th{background:var(--ink);color:#fff;font-weight:900;letter-spacing:1px;font-size:12px;text-transform:uppercase;text-align:left;padding:14px 16px}
+.odds-table td{padding:14px 16px;border-top:1px solid var(--line);font-size:15px;vertical-align:middle;background:#15151a}
+.odds-table tr:nth-child(even) td{background:#191920}
+.odds-table .match{font-weight:800}
+.odds-table .pick{font-family:'Anton';font-size:20px;color:var(--lime)}
+.chip{display:inline-block;background:var(--green);color:#fff;font-weight:800;font-size:13px;padding:4px 11px;border-radius:30px}
+.rate{display:inline-block;font-weight:900;font-size:11px;letter-spacing:.5px;padding:4px 10px;border-radius:30px;text-transform:uppercase}
+.r-top{background:var(--lime);color:var(--ink)}
+.r-mid{background:var(--cyan);color:var(--ink)}
+.r-spec{background:var(--purple);color:#fff}
+.read{font-size:13px;color:rgba(255,255,255,.6);line-height:1.4}
+
+/* bracket note */
+.bracket-note{background:var(--green);color:#fff;border-radius:30px 30px 16px 16px;padding:28px;margin-bottom:30px;position:relative;overflow:hidden}
+.bracket-note:before{content:"";position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:var(--lime);border-radius:50%;opacity:.4}
+.bracket-note h3{font-family:'Anton';font-size:26px;position:relative;margin-bottom:8px;text-transform:uppercase}
+.bracket-note p{position:relative;font-size:15px;line-height:1.55;font-weight:500}
+
+/* qual cards */
+.qual-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.qcard{border-radius:24px 24px 12px 12px;overflow:hidden;background:#15151a;border:1px solid var(--line)}
+.qcard h4{font-family:'Anton';font-size:18px;padding:12px 16px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+.qcard h4 span{font-weight:800;font-size:11px;letter-spacing:1px}
+.qrow{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--line);font-size:14px}
+.qrow .nm{font-weight:700;display:flex;align-items:center;gap:8px}
+.qrow .od{font-family:'Anton';font-size:17px}
+.dot{width:11px;height:11px;border-radius:50%;flex:none}
+.likely{color:var(--lime);font-weight:800}
+.bubble{color:var(--red);font-weight:800}
+
+/* deep runs */
+.deep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+.deep{border-radius:20px 20px 12px 12px;padding:18px;background:#15151a;border:1px dashed rgba(255,255,255,.25)}
+.deep .stage{font-weight:900;letter-spacing:1px;color:var(--red);font-size:13px;text-transform:uppercase}
+.deep .picks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.deep .picks span{background:#23232a;color:#fff;font-weight:700;font-size:13px;padding:5px 11px;border-radius:30px}
+.deep .picks span b{color:var(--gold-lt);margin-left:5px}
+
+/* combinadas */
+.combi-wrap{display:grid;grid-template-columns:1fr;gap:22px}
+.combi{border-radius:30px 30px 16px 16px;padding:30px;display:grid;gap:6px;position:relative;overflow:hidden}
+.combi.main{background:linear-gradient(150deg,#1a3a22,#0f0f12);border:2px solid var(--lime)}
+.combi.over{background:linear-gradient(150deg,#3a1a0f,#0f0f12);border:2px solid var(--red)}
+.combi .ctag{font-weight:900;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+.combi.main .ctag{color:var(--lime)} .combi.over .ctag{color:var(--red)}
+.combi h3{font-family:'Anton';font-size:26px;margin-bottom:8px;text-transform:uppercase}
+.combi .leg{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.12);padding:12px 0;gap:12px}
+.combi .leg .l{font-weight:700;font-size:15px}
+.combi .leg .l small{display:block;color:rgba(255,255,255,.55);font-weight:500;font-size:12px}
+.combi .leg .o{font-family:'Anton';font-size:22px}
+.combi.main .leg .o{color:var(--lime)} .combi.over .leg .o{color:var(--gold-lt)}
+.combi .total{display:flex;justify-content:space-between;align-items:center;padding-top:16px}
+.combi .total b{font-weight:900;letter-spacing:1.5px;font-size:14px;text-transform:uppercase}
+.combi .total .big{font-family:'Anton';font-size:46px}
+.combi.main .total .big{color:var(--lime)} .combi.over .total .big{color:var(--gold-lt)}
+.combi .verdict{margin-top:14px;background:rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+.combi .verdict b{color:var(--lime)} .combi.over .verdict b{color:var(--gold-lt)}
+
+/* predicciones de partidos 1X2 */
+.pred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
+.pred{border-radius:26px 26px 14px 14px;overflow:hidden;background:#15151a;border:1px solid var(--line);transition:transform .25s}
+.pred:hover{transform:translateY(-5px)}
+.pred .ph{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;font-weight:900;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink)}
+.pred .ph .vs{font-family:'Anton';font-size:13px;background:rgba(0,0,0,.18);padding:2px 9px;border-radius:20px}
+.pred .teams{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;gap:10px}
+.pred .teams .t{flex:1;text-align:center}
+.pred .teams .t .nm{font-family:'Anton';font-size:19px;text-transform:uppercase;line-height:1}
+.pred .teams .t .fav{font-weight:800;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--lime);margin-top:3px;display:block;min-height:13px}
+.pred .teams .mid{font-family:'Anton';font-size:14px;color:rgba(255,255,255,.4)}
+.bar1x2{display:flex;height:30px;margin:0 18px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.bar1x2 .seg{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;transition:flex .4s}
+.bar1x2 .s1{background:linear-gradient(90deg,var(--green),var(--lime));color:var(--ink)}
+.bar1x2 .sx{background:rgba(255,255,255,.16);color:#fff}
+.bar1x2 .s2{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#fff}
+.pred .legend{display:flex;justify-content:space-between;padding:9px 18px 4px;font-weight:800;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.pred .legend b{display:block;font-family:'Anton';font-size:15px;letter-spacing:0}
+.pred .legend .l1 b{color:var(--lime)} .pred .legend .lx b{color:#fff} .pred .legend .l2 b{color:var(--cyan)}
+.pred .verdict{margin:6px 16px 16px;background:rgba(255,255,255,.05);border-radius:12px;padding:11px 13px;font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.72)}
+.pred .verdict b{color:var(--gold-lt)}
+
+footer{background:var(--ink);padding:52px 28px;text-align:center;border-top:3px solid var(--lime)}
+footer .resp{max-width:720px;margin:0 auto 20px;border:1px solid var(--red);border-radius:16px;padding:18px;background:rgba(232,52,28,.1);font-size:14px;line-height:1.55;color:rgba(255,255,255,.85)}
+footer .resp b{color:var(--gold-lt)}
+footer .sig{font-family:'Anton';font-size:22px;letter-spacing:1px}
+footer .sig b{color:var(--lime)}
+footer small{display:block;margin-top:8px;color:rgba(255,255,255,.4)}
+
+@media(max-width:760px){.blockgrid{min-height:auto}.col{min-height:240px}.hero-overlay{position:static;padding:30px 22px;background:var(--ink)}.hero-overlay h1{text-shadow:none}}
+@media(max-width:640px){nav{flex-direction:column;gap:10px}section{padding:54px 18px}.statbar{grid-template-columns:repeat(2,1fr)}.statbar .s:nth-child(2){border-right:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="mini26">26</span> WORLD CUP · <span style="color:var(--lime)">BETS</span></div>
+  <div class="links">
+    <a href="#favoritos">Favoritos</a>
+    <a href="#partidos">Pronósticos</a>
+    <a href="#over">Over de Goles</a>
+    <a href="#octavos">Octavos+</a>
+    <a href="#combi">Combinadas</a>
+  </div>
+</nav>
+
+<!-- HERO: réplica de la rejilla de bloques oficial -->
+<header class="hero">
+  <div class="blockgrid">
+    <div class="col c1"><div class="cyan"></div><div class="panel"></div></div>
+    <div class="col c2">
+      <div class="green">
+        <svg class="trophy" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+          <path d="M18 8h24v6c0 2 4 2 6 4s4 6 2 12-8 9-12 9c-2 5-6 8-6 12v8h6c3 0 5 2 5 5v3H17v-3c0-3 2-5 5-5h6v-8c0-4-4-7-6-12-4 0-10-3-12-9s0-10 2-12 6-2 6-4V8Zm-2 9c-1 1-3 1-4 2-2 2-3 5-1 8s5 4 7 4c-1-5-2-9-2-14Zm28 0c0 5-1 9-2 14 2 0 5-1 7-4s1-6-1-8c-1-1-3-1-4-2Z"/>
+        </svg>
+        <div class="wc">FIFA WORLD CUP</div>
+        <div class="host">CANADA<br>MEXICO<br>USA</div>
+      </div>
+    </div>
+    <div class="col c3"><div class="panel"></div><div class="purple"></div></div>
+  </div>
+  <div class="hero-overlay">
+    <span class="tag">⚡ ANÁLISIS TIPSTER · 11 JUN – 19 JUL 2026</span>
+    <h1>BENDER<span class="out">BETS</span><span class="yr">FIFA WORLD CUP 26</span></h1>
+    <p class="sub">Lectura profesional del Mundial con foco en <b>Over de goles</b>, clasificación a octavos y combinadas de valor. 48 selecciones, 12 grupos, 104 partidos.</p>
+  </div>
+</header>
+<div class="statbar">
+  <div class="s b1"><b>48</b><span>Selecciones</span></div>
+  <div class="s b2"><b>12</b><span>Grupos</span></div>
+  <div class="s b3"><b>104</b><span>Partidos</span></div>
+  <div class="s b4"><b>OVER</b><span>El mercado clave</span></div>
+</div>
+
+<!-- FAVORITOS -->
+<section id="favoritos">
+  <div class="wrap">
+    <div class="sec-head"><div class="badge">01</div><h2>Favoritos al <em>título</em></h2></div>
+    <div class="colorstrip"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="sec-sub">El podio del mercado a principios de junio. España y Francia despegadas; Inglaterra y Brasil pelean el tercer escalón. Es contexto, no donde está el valor — pero marca el mapa de fuerzas.</p>
+    <div class="fav-grid" id="favGrid"></div>
+  </div>
+</section>
+
+<!-- PRONÓSTICOS 1X2 -->
+<section id="partidos" style="background:#0d0d0f">
+  <div class="wrap">
+    <div class="sec-head"><div class="badge">02</div><h2>Pronóstico de <em>partidos</em></h2></div>
+    <div class="colorstrip"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="sec-sub">Un partido top por cada grupo, con probabilidad 1X2 (Local · Empate · Visitante) repartida en la misma barra de porcentaje. La franja verde-lima es el local, la gris el empate y la azul-cian el visitante.</p>
+    <div class="pred-grid" id="predGrid"></div>
+  </div>
+</section>
+
+<!-- OVER -->
+<section id="over" style="background:#0a0a0c">
+  <div class="wrap">
+    <div class="sec-head"><div class="badge">03</div><h2>El mercado del <em>Over</em></h2></div>
+    <div class="colorstrip"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="analyst">
+      <div class="who">⚡ Lectura del tipster · por qué el Over</div>
+      <p>El Over de goles es, para mí, el mercado más explotable de un Mundial con 48 equipos. La razón es estructural: hay más desniveles que nunca. Las selecciones top miden contra debutantes (Curazao, Cabo Verde, Uzbekistán) en partidos con xG altísimo. Y en fase de grupos los grandes salen a sentenciar pronto para asegurar el primer puesto y evitar el mejor tercero — no especulan.</p>
+      <p>No persigo cuotas bajas tipo Over 0.5. Busco la franja <b>1.55–1.95</b>, donde el mercado aún no ha ajustado el potencial ofensivo. Rating: <span class="rate r-top">TOP PICK</span> valor claro · <span class="rate r-mid">SÓLIDO</span> confianza · <span class="rate r-spec">ESPECULATIVO</span> riesgo mayor, cuota jugosa.</p>
+    </div>
+    <table class="odds-table">
+      <thead><tr><th>Partido</th><th>Línea Over</th><th>Cuota</th><th>Rating</th><th>Lectura</th></tr></thead>
+      <tbody id="overBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- OCTAVOS -->
+<section id="octavos">
+  <div class="wrap">
+    <div class="sec-head"><div class="badge">04</div><h2>¿Quién pasa a <em>octavos</em>?</h2></div>
+    <div class="colorstrip"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="sec-sub">Mercado de "clasificación de fase" estilo Winamax. El valor casi siempre está en los segundos de grupo claros, no en ganar el grupo: pagan más y el riesgo apenas sube, porque basta acabar entre los dos primeros (o ser mejor tercero).</p>
+    <div class="bracket-note">
+      <h3>⚽ Cómo se clasifica en 2026</h3>
+      <p>Pasan los 2 primeros de cada grupo + los 8 mejores terceros = <b>32 a dieciseisavos</b>. "Clasificar" significa entrar en esos 32. Por eso "pasa de ronda" es más seguro que "gana el grupo": cubres también al subcampeón de zona.</p>
+    </div>
+    <div class="qual-grid" id="qualGrid"></div>
+    <h3 style="font-family:'Anton';font-size:28px;margin:46px 0 4px;text-transform:uppercase">Rondas avanzadas</h3>
+    <p class="sec-sub" style="margin-bottom:6px">Recorridos largos con cuota orientativa, por fase alcanzada.</p>
+    <div class="deep-grid" id="deepGrid"></div>
+  </div>
+</section>
+
+<!-- COMBINADAS -->
+<section id="combi" style="background:#0a0a0c">
+  <div class="wrap">
+    <div class="sec-head"><div class="badge">05</div><h2>Combinadas <em>de valor</em></h2></div>
+    <div class="colorstrip"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="sec-sub">Dos billetes. El principal: la combinada de valor con "Brasil pasa a octavos" (no "gana grupo"), sin Argentina, mezclando clasificaciones holgadas + un Over. El segundo, alternativa 100% Over, más agresiva.</p>
+    <div class="combi-wrap">
+      <div class="combi main">
+        <div class="ctag">★ Combinada principal · valor equilibrado</div>
+        <h3>El billete del tipster</h3>
+        <div id="combiLegs"></div>
+        <div class="total"><b>Cuota total</b><span class="big" id="combiTotal">—</span></div>
+        <div class="verdict"><b>Por qué esta:</b> todas las patas son equipos que pasan de ronda con holgura, ninguna depende de ganar el grupo. Cambiar Brasil de "gana grupo" a "pasa a octavos" baja un pelín la cuota pero te cubre si Marruecos le roba el primer puesto del C. La pata Over da chispa sin disparar el riesgo. Sin Argentina, como pediste.</div>
+      </div>
+      <div class="combi over">
+        <div class="ctag">★ Alternativa · 100% Over</div>
+        <h3>Combinada goleadora</h3>
+        <div id="combi2Legs"></div>
+        <div class="total"><b>Cuota total</b><span class="big" id="combi2Total">—</span></div>
+        <div class="verdict"><b>Aviso:</b> billete más agresivo. Cuatro Overs de partidos con desnivel grande o tradición ofensiva. Mayor cuota, pero un solo 1–0 inesperado la tumba. Para stake pequeño.</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-top:16px">* Cuota total = producto de las cuotas individuales. Cada pata multiplica retorno y riesgo. Como tipster: prefiero 4–5 patas sólidas a 8 forzadas.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="resp"><b>Juega con responsabilidad · +18.</b> Contenido analítico y de entretenimiento. Las cuotas son orientativas (medias de mercado, junio 2026) y <b>cambian constantemente</b>. Ninguna apuesta garantiza beneficios. Si el juego deja de ser diversión, en España tienes ayuda en <b>JÓGAME · 900 200 225</b> y en jugarbien.es.</div>
+  <div class="sig">WORLD CUP 26 · <b>BENDERBETS</b></div>
+  <small>Grupos y favoritos verificados a 1–2 jun 2026. No es asesoramiento financiero. Estética inspirada en la identidad visual del torneo; no es un material oficial de FIFA.</small>
+</footer>
+
+<script>
+const favoritos=[
+  {team:"España",odd:"5.50",prob:18,rank:"#1 Favorita",c:"var(--green)"},
+  {team:"Francia",odd:"6.50",prob:15,rank:"#2",c:"var(--blue)"},
+  {team:"Inglaterra",odd:"7.50",prob:13,rank:"#3",c:"var(--red)"},
+  {team:"Brasil",odd:"7.50",prob:12,rank:"#4",c:"var(--lime)"},
+  {team:"Portugal",odd:"13.0",prob:7,rank:"Tapado",c:"var(--purple)"},
+  {team:"Alemania",odd:"15.0",prob:6,rank:"Outsider",c:"var(--cyan)"},
+  {team:"Países Bajos",odd:"19.0",prob:4,rank:"Outsider",c:"var(--gold-lt)"},
+  {team:"Bélgica",odd:"21.0",prob:4,rank:"Outsider",c:"var(--green)"},
+];
+
+/* Pronóstico 1X2 — un partido top por grupo. p1=local, px=empate, p2=visitante (suman 100) */
+const preds=[
+  {g:"A",hc:"var(--green)",home:"México",away:"Corea del Sur",p1:48,px:28,p2:24,fav:1,txt:"México con el empuje local en CDMX. Corea vende cara su piel pero el factor casa pesa."},
+  {g:"B",hc:"var(--cyan)",home:"Suiza",away:"Canadá",p1:40,px:30,p2:30,fav:0,txt:"Duelo parejo por el primer puesto. Canadá juega en casa; Suiza es más fiable. Empate muy en juego."},
+  {g:"C",hc:"var(--lime)",home:"Brasil",away:"Marruecos",p1:52,px:26,p2:22,fav:1,txt:"El partido grande del grupo. Brasil parte favorito, pero Marruecos (semifinalista en 2022) puede dar el golpe."},
+  {g:"D",hc:"var(--red)",home:"EE. UU.",away:"Turquía",p1:42,px:28,p2:30,fav:0,txt:"Anfitrión contra una Turquía en alza. Casi a la par; el ambiente local decanta ligeramente al lado USA."},
+  {g:"E",hc:"var(--purple)",home:"Alemania",away:"Costa de Marfil",p1:58,px:24,p2:18,fav:1,txt:"Alemania claramente superior sobre el papel. Costa de Marfil compite físico pero le falta nivel para ganar."},
+  {g:"F",hc:"var(--blue)",home:"Países Bajos",away:"Japón",p1:50,px:27,p2:23,fav:1,txt:"Oranje favorita, pero Japón es de las mejores asiáticas y le puede plantar cara de tú a tú."},
+  {g:"G",hc:"var(--green)",home:"Bélgica",away:"Egipto",p1:54,px:26,p2:20,fav:1,txt:"Bélgica con más fondo de armario. Egipto, con Salah, siempre tiene el plus para sorprender a balón parado."},
+  {g:"H",hc:"var(--cyan)",home:"España",away:"Uruguay",p1:55,px:26,p2:19,fav:1,txt:"El duelo de campeones del grupo. España llega como #1 del mercado; Uruguay es el rival más serio de la zona."},
+  {g:"I",hc:"var(--lime)",home:"Francia",away:"Senegal",p1:53,px:25,p2:22,fav:1,txt:"Francia favorita por plantilla, aunque Senegal llega muy armado y no se encerrará. Partido con goles."},
+  {g:"J",hc:"var(--red)",home:"Austria",away:"Argelia",p1:44,px:30,p2:26,fav:1,txt:"Sin Argentina en el foco, Austria se postula como cabeza del grupo. Argelia pelea el segundo puesto."},
+  {g:"K",hc:"var(--purple)",home:"Portugal",away:"Colombia",p1:49,px:27,p2:24,fav:1,txt:"El choque más atractivo del K. Portugal favorita corta; Colombia tiene argumentos para el batacazo."},
+  {g:"L",hc:"var(--blue)",home:"Inglaterra",away:"Croacia",p1:50,px:28,p2:22,fav:1,txt:"Inglaterra parte por delante, pero Croacia (finalista 2018) siempre compite. El empate no sería sorpresa."},
+];
+const over=[
+  {match:"Alemania 🆚 Curazao (E)",line:"Over 3.5",odd:"1.90",rate:"top",txt:"El mayor desnivel del grupo E. Alemania necesita goal average y Curazao es la nación más pequeña del torneo. Goleada en el horizonte."},
+  {match:"España 🆚 Cabo Verde (H)",line:"Over 2.5",odd:"1.55",rate:"top",txt:"La España más ofensiva ante la debutante Cabo Verde. De mis Overs con más confianza de toda la fase."},
+  {match:"Inglaterra 🆚 Panamá (L)",line:"Over 2.5",odd:"1.60",rate:"top",txt:"Inglaterra gran favorita ante una Panamá que compite pero concede. Histórico de goleadas inglesas en grupos."},
+  {match:"Portugal 🆚 Uzbekistán (K)",line:"Over 2.5",odd:"1.65",rate:"top",txt:"Portugal con una delantera riquísima y Uzbekistán debutante. Difícil que el marcador se quede corto."},
+  {match:"Brasil 🆚 Escocia (C)",line:"Over 2.5",odd:"1.70",rate:"mid",txt:"Brasil saldrá a por todas para no depender de Marruecos. Escocia compite pero tiene fugas atrás."},
+  {match:"Países Bajos 🆚 Túnez (F)",line:"Over 2.5",odd:"1.75",rate:"mid",txt:"Oranje muy ofensiva; Túnez aguanta un rato pero acaba cediendo espacios."},
+  {match:"Francia 🆚 Senegal (I)",line:"Over 2.5",odd:"1.80",rate:"mid",txt:"Dos selecciones con pegada. Senegal no se encierra, lo que abre el partido a goles por ambos lados."},
+  {match:"Bélgica 🆚 Nueva Zelanda (G)",line:"Over 2.5",odd:"1.70",rate:"mid",txt:"Bélgica buscará cerrar pronto el grupo; N. Zelanda llega con menos nivel individual."},
+  {match:"Argelia 🆚 Jordania (J)",line:"Over 2.5",odd:"1.95",rate:"spec",txt:"Dos selecciones que se juegan el pase a vida o muerte. Suelen abrirse en el tramo final. Cuota alta."},
+  {match:"Egipto 🆚 Irán (G)",line:"Over 1.5",odd:"1.40",rate:"spec",txt:"Partido potencialmente trabado entre dos defensas serias — por eso bajo a Over 1.5. Seguro, cuota corta."},
+];
+const groups=[
+  {g:"A",hc:"var(--green)",teams:[["México","1.30","green","CDMX manda"],["Corea del Sur","2.00",""],["Chequia","2.50",""],["Sudáfrica","4.00","red"]]},
+  {g:"B",hc:"var(--cyan)",teams:[["Suiza","1.45","green"],["Canadá","1.70","green","Local"],["Catar","3.50",""],["Bosnia","3.00","red"]]},
+  {g:"C",hc:"var(--lime)",teams:[["Brasil","1.18","green"],["Marruecos","1.65","green","Value 2º"],["Escocia","3.25","red"],["Haití","8.00",""]]},
+  {g:"D",hc:"var(--red)",teams:[["EE. UU.","1.40","green","Local"],["Turquía","1.80","green"],["Paraguay","2.75",""],["Australia","3.25","red"]]},
+  {g:"E",hc:"var(--purple)",teams:[["Alemania","1.20","green"],["Ecuador","2.10","green","Value 2º"],["C. de Marfil","2.50","red"],["Curazao","9.00",""]]},
+  {g:"F",hc:"var(--blue)",teams:[["Países Bajos","1.25","green"],["Japón","1.75","green"],["Suecia","2.60","red"],["Túnez","4.00",""]]},
+  {g:"G",hc:"var(--green)",teams:[["Bélgica","1.30","green"],["Egipto","2.20","green"],["Irán","2.75","red"],["N. Zelanda","6.00",""]]},
+  {g:"H",hc:"var(--cyan)",teams:[["España","1.12","green"],["Uruguay","1.70","green","Value 2º"],["Arabia Saudí","3.50","red"],["Cabo Verde","7.50",""]]},
+  {g:"I",hc:"var(--lime)",teams:[["Francia","1.18","green"],["Noruega","1.85","green"],["Senegal","2.00","red","Tapado"],["Irak","8.00",""]]},
+  {g:"J",hc:"var(--red)",teams:[["Austria","2.00","green","Sin Argentina"],["Argelia","2.75","red"],["Jordania","7.00",""],["—","—",""]]},
+  {g:"K",hc:"var(--purple)",teams:[["Portugal","1.22","green"],["Colombia","1.70","green","Value 2º"],["Uzbekistán","3.50","red"],["RD Congo","4.50",""]]},
+  {g:"L",hc:"var(--blue)",teams:[["Inglaterra","1.18","green"],["Croacia","1.90","green"],["Ghana","3.25","red"],["Panamá","5.50",""]]},
+];
+const deep=[
+  {stage:"A cuartos de final",picks:[["España","2.00"],["Francia","2.30"],["Brasil","2.75"],["Inglaterra","2.50"],["Portugal","4.00"]]},
+  {stage:"A semifinales",picks:[["España","3.50"],["Francia","3.75"],["Inglaterra","4.50"],["Brasil","4.50"],["Portugal","7.00"]]},
+  {stage:"A la final",picks:[["España","3.25"],["Francia","3.75"],["Brasil","6.00"],["Inglaterra","5.00"],["Portugal","11.0"]]},
+  {stage:"Sorpresa a cuartos",picks:[["Marruecos","4.50"],["Senegal","6.00"],["Croacia","5.00"],["Colombia","6.50"]]},
+];
+const combi=[
+  {l:"España clasifica a octavos",s:"Top-2 Grupo H · sólida",o:"1.08"},
+  {l:"Brasil pasa a octavos",s:"Top-2 Grupo C (antes: gana grupo)",o:"1.18"},
+  {l:"Francia clasifica a octavos",s:"Top-2 Grupo I",o:"1.18"},
+  {l:"Portugal clasifica a octavos",s:"Top-2 Grupo K",o:"1.22"},
+  {l:"Over 2.5 · España–Cabo Verde",s:"Top pick goleador",o:"1.55"},
+];
+const combi2=[
+  {l:"Over 2.5 · España–Cabo Verde",s:"Grupo H",o:"1.55"},
+  {l:"Over 2.5 · Inglaterra–Panamá",s:"Grupo L",o:"1.60"},
+  {l:"Over 2.5 · Portugal–Uzbekistán",s:"Grupo K",o:"1.65"},
+  {l:"Over 3.5 · Alemania–Curazao",s:"Grupo E",o:"1.90"},
+];
+
+document.getElementById('favGrid').innerHTML=favoritos.map(f=>`
+  <div class="fav"><div class="stripe" style="background:${f.c}"></div><div class="top"><div class="rank">${f.rank}</div><div class="team">${f.team}</div></div>
+  <div class="body"><div class="odd-label">Cuota campeón</div><div class="odd">${f.odd}</div>
+  <div class="prob"><i style="width:${f.prob*5.2}%"></i></div><div class="prob-txt">~${f.prob}% prob. implícita</div></div></div>`).join('');
+
+/* render pronósticos 1X2 */
+document.getElementById('predGrid').innerHTML=preds.map(p=>{
+  const f1=p.fav===1?'<span class="fav">★ Favorito</span>':'<span class="fav"></span>';
+  const f2=p.fav===2?'<span class="fav">★ Favorito</span>':'<span class="fav"></span>';
+  return `<div class="pred">
+    <div class="ph" style="background:${p.hc}"><span>Grupo ${p.g}</span><span class="vs">1 X 2</span></div>
+    <div class="teams">
+      <div class="t"><div class="nm">${p.home}</div>${f1}</div>
+      <div class="mid">VS</div>
+      <div class="t"><div class="nm">${p.away}</div>${f2}</div>
+    </div>
+    <div class="bar1x2">
+      <div class="seg s1" style="flex:${p.p1}">${p.p1}%</div>
+      <div class="seg sx" style="flex:${p.px}">${p.px}%</div>
+      <div class="seg s2" style="flex:${p.p2}">${p.p2}%</div>
+    </div>
+    <div class="legend">
+      <div class="l1">Gana ${p.home}<b>${p.p1}%</b></div>
+      <div class="lx" style="text-align:center">Empate<b>${p.px}%</b></div>
+      <div class="l2" style="text-align:right">Gana ${p.away}<b>${p.p2}%</b></div>
+    </div>
+    <div class="verdict"><b>Lectura:</b> ${p.txt}</div>
+  </div>`;
+}).join('');
+
+const rateLabel={top:'<span class="rate r-top">Top Pick</span>',mid:'<span class="rate r-mid">Sólido</span>',spec:'<span class="rate r-spec">Especulativo</span>'};
+document.getElementById('overBody').innerHTML=over.map(o=>`
+  <tr><td class="match">${o.match}</td><td><span class="chip">${o.line}</span></td>
+  <td class="pick">${o.odd}</td><td>${rateLabel[o.rate]}</td><td class="read">${o.txt}</td></tr>`).join('');
+
+document.getElementById('qualGrid').innerHTML=groups.map(gr=>`
+  <div class="qcard"><h4 style="background:${gr.hc}">Grupo ${gr.g} <span>Clasificar</span></h4>
+  ${gr.teams.map(t=>{if(t[0]==='—')return '';
+    const color=t[2]==='green'?'var(--lime)':t[2]==='red'?'var(--red)':'rgba(255,255,255,.35)';
+    const cls=t[2]==='green'?'likely':t[2]==='red'?'bubble':'';
+    const note=t[3]?`<small style="color:rgba(255,255,255,.4);font-weight:500">${t[3]}</small>`:'';
+    return `<div class="qrow"><div class="nm"><span class="dot" style="background:${color}"></span>${t[0]} ${note}</div><div class="od ${cls}">${t[1]}</div></div>`;
+  }).join('')}</div>`).join('');
+
+document.getElementById('deepGrid').innerHTML=deep.map(d=>`
+  <div class="deep"><div class="stage">${d.stage}</div>
+  <div class="picks">${d.picks.map(p=>`<span>${p[0]}<b>${p[1]}</b></span>`).join('')}</div></div>`).join('');
+
+function renderCombi(arr,legsId,totId){let t=1;arr.forEach(c=>t*=parseFloat(c.o));
+  document.getElementById(legsId).innerHTML=arr.map(c=>`<div class="leg"><div class="l">${c.l}<small>${c.s}</small></div><div class="o">${c.o}</div></div>`).join('');
+  document.getElementById(totId).textContent=t.toFixed(2);}
+renderCombi(combi,'combiLegs','combiTotal');
+renderCombi(combi2,'combi2Legs','combi2Total');
+</script>
+</body>
+</html>
